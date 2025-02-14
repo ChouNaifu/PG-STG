@@ -62,7 +62,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		sceneManager.Update(keys, preKeys);
 		if (sceneManager.GetScene() == 0) {
-			ball->player_.isAlive = true;
+			ball->SetStatus(true);
 			for (int i = 0; i < 5; i++) {
 				enemies[i] = new Enemy(rand() % 1000 + 100, rand() % 200 + 100);
 				enemies[i]->SetSpeed(rand() % 20 - 10, rand() % 20 - 10);
@@ -75,13 +75,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			for (int i = 0; i < 5; i++) {
 				enemies[i]->Update();
-				if (ball->player_.pos.x > enemies[i]->GetPosX() && ball->player_.pos.x < enemies[i]->GetPosX() + 50
-					&& ball->player_.pos.y > enemies[i]->GetPosY() && ball->player_.pos.y < enemies[i]->GetPosY() + 50) {
-					ball->player_.isAlive = false;
+				if (ball->GetPosX() > enemies[i]->GetPosX() && ball->GetPosX() < enemies[i]->GetPosX() + 50
+					&& ball->GetPosY() > enemies[i]->GetPosY() && ball->GetPosY() < enemies[i]->GetPosY() + 50) {
+					ball->SetStatus(false);
 					sceneManager.SetScene(SCENE3);
 				}
-				if (CheckCollision(bullet, enemies[i]) && enemies[i]->isAlive_) {
-					enemies[i]->isAlive_ = false;
+				if (CheckCollision(bullet, enemies[i]) && enemies[i]->GetStatus()) {
+					enemies[i]->SetStatus(false);
 					score++;
 				}
 			}

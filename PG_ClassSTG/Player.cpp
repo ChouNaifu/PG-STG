@@ -14,6 +14,13 @@ Player::~Player() {
 	player_.isAlive = false;
 }
 
+int Player::GetPosX() { return player_.pos.x; }
+int Player::GetPosY() { return player_.pos.y; }
+
+bool Player::GetStatus() {
+	return player_.isAlive;
+}
+
 void Player::Update(char* keys, char* preKeys) {
 
 	if (keys[DIK_W] && player_.pos.y >= 500) {
@@ -47,6 +54,10 @@ void Player::Update(char* keys, char* preKeys) {
 void Player::Draw() {
 	Novice::DrawEllipse(player_.pos.x, player_.pos.y, player_.radius, player_.radius, 0.0f, RED, kFillModeSolid);
 	bullet_->Draw();
+}
+
+void Player::SetStatus(bool status) {
+	player_.isAlive = status;
 }
 
 Bullet* Player::GetBullet() const {

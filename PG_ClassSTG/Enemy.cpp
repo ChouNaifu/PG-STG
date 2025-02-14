@@ -42,8 +42,13 @@ void Enemy::Draw() {
 
 int Enemy::GetPosX() { return pos_.x; }
 int Enemy::GetPosY() { return pos_.y; }
+bool Enemy::GetStatus() { return isAlive_; }
 
 void Enemy::SetSpeed(int speedX, int speedY) {
     speedX_ = speedX;
     speedY_ = speedY;
+}
+
+void Enemy::SetStatus(bool status) {
+    isAlive_ = status;
 }
